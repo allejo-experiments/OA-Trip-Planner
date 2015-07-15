@@ -1,4 +1,8 @@
 function removeFluff (array) {
+    if (!Array.isArray(array)) {
+        return;
+    }
+
     for (var i = 0; i < array.length ; i++) {
         array[i] = array[i].replace("•", "").trim();
     }
