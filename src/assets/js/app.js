@@ -31,21 +31,35 @@ tripPlanner.run(function () {
 tripPlanner.controller("TripController", function ($scope) {
     $scope.planner = model;
     $scope.trip = tripModel;
-
-    $scope.deleteTrip = function (index) {
-        this.planner.trips.splice(index, 1);
-
-        this.saveTrips();
-    }
+    $scope.editing = -1;
 
     $scope.addTrip = function () {
         removeFluff(this.trip.excludes);
         removeFluff(this.trip.includes);
 
-        $scope.planner.trips.push($scope.trip);
+        if ($scope.editing >= 0) {
+            $scope.planner.trips[$scope.editing] = $scope.trip;
+        }
+        else {
+            $scope.planner.trips.push($scope.trip);
+        }
+
         $scope.trip = tripModel;
+        $scope.editing = -1;
 
         this.saveTrips();
+    }
+
+    $scope.deleteTrip = function (index) {
+        $scope.planner.trips.splice(index, 1);
+
+        this.saveTrips();
+    }
+
+    $scope.editTrip = function (index) {
+        $scope.editing = index;
+
+        $scope.trip = this.planner.trips[index];
     }
 
     $scope.saveTrips = function () {
