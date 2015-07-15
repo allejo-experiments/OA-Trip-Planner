@@ -80,7 +80,7 @@
                     <h3>Trip List</h3>
 
                     <ul>
-                        <li ng-repeat="trip in planner.trips">
+                        <li ng-repeat="trip in planner.trips track by $index">
                             <i class="fa fa-close" ng-click="deleteTrip($index)"></i>
                             <i class="fa fa-pencil" ng-click="editTrip($index)"></i>
                             <span>{{trip.date}} - {{trip.name}}</span>
@@ -88,52 +88,6 @@
                     </ul>
                 </section>
             </section>
-
-            <!-- <section id="tripPreview" class="trip-preview">
-                <h3>Trip Preview</h3>
-                <div class="alert alert-info">
-                    <p>This is a preview of how the trip will appear on the <a href="http://www.csun.edu/as/outdoor-adventures/trips">OA Trips page</a></p>
-                </div>
-                <article class="preview">
-                    <h4>{{trip.name}}</h4>
-
-                    <p>{{trip.desc}}</p>
-
-                    <p>
-                        <strong>Trip includes:</strong>
-                    </p>
-
-                    <ul>
-                        <li ng-repeat="include in trip.includes">
-                            {{include}}
-                        </li>
-                    </ul>
-
-                    <p>
-                        <strong>Trip excludes:</strong>
-                    </p>
-
-                    <ul>
-                        <li ng-repeat="exclude in trip.excludes">
-                            {{exclude}}
-                        </li>
-                    </ul>
-
-                    <p>
-                        <strong>Meeting location:</strong> {{trip.location}}
-                    </p>
-                    <p>
-                        <strong>Strenuosity Level:</strong> {{trip.level}}
-                    </p>
-                    <p>
-                        <strong>Cost:</strong>
-                        <ul>
-                            <li>{{trip.studentPrice}} (Student)</li>
-                            <li>{{trip.noStudentPrice}} (Non-student)</li>
-                        </ul>
-                    </p>
-                </article>
-            </section> -->
         </main>
     </body>
 </html>
