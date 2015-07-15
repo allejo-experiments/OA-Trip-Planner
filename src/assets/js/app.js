@@ -8,21 +8,20 @@ function removeFluff (array) {
     }
 }
 
+function handleCurrency (string) {
+    if (string.toLowerCase() === "free") {
+        return "Free";
+    }
+    else if (string.charAt(0) !== "$") {
+        return "$" + string;
+    }
+
+    return string;
+}
+
 var model = {
     trips: []
 };
-
-var tripModel = {
-    date: '',
-    name: '',
-    desc: '',
-    location: '',
-    includes: [],
-    excludes: [],
-    studentPrice: 0,
-    nonStudentPrice: 0,
-    level: 0
-}
 
 var tripPlanner = angular.module("tripPlanner", []);
 
@@ -34,12 +33,15 @@ tripPlanner.run(function () {
 
 tripPlanner.controller("TripController", function ($scope) {
     $scope.planner = model;
-    $scope.trip = tripModel;
+    $scope.trip = {};
     $scope.editing = -1;
 
     $scope.addTrip = function () {
         removeFluff(this.trip.excludes);
         removeFluff(this.trip.includes);
+
+        $scope.trip.studentPrice = handleCurrency($scope.trip.studentPrice);
+        $scope.trip.nonStudentPrice = handleCurrency($scope.trip.nonStudentPrice);
 
         if ($scope.editing >= 0) {
             $scope.planner.trips[$scope.editing] = $scope.trip;
