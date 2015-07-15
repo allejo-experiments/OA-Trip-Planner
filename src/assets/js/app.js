@@ -44,7 +44,7 @@ tripPlanner.controller("TripController", function ($scope) {
             $scope.planner.trips.push($scope.trip);
         }
 
-        $scope.trip = tripModel;
+        $scope.trip = {};
         $scope.editing = -1;
 
         this.saveTrips();
@@ -60,6 +60,10 @@ tripPlanner.controller("TripController", function ($scope) {
         $scope.editing = index;
 
         $scope.trip = this.planner.trips[index];
+    }
+
+    $scope.exportTrips = function () {
+        console.log(JSON.stringify($scope.planner));
     }
 
     $scope.saveTrips = function () {
