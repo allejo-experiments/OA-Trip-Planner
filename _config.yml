@@ -4,6 +4,8 @@
 title: Outdoor Adventures Trip Planner
 include:
   - 'assets'
+exclude:
+  - 'README.md'
 
 
 # URL Settings
