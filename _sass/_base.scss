@@ -15,6 +15,7 @@
 }
 
 .trip-list {
+
     article {
         border-bottom: 1px solid #E0E0E0;
 
@@ -30,4 +31,10 @@
             line-height: 50px;
         }
     }
+}
+
+.empty-trips {
+    color: #949494;
+    font-size: 18px;
+    padding: 25px 0;
 }

@@ -64,8 +64,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button class="btn btn-primary" ng-click="addTrip()" ng-show="editor">Save Trip</button>
-                <button class="btn btn-primary" ng-click="addTrip()" ng-show="!editor">Add Trip</button>
+                <button class="btn btn-primary" data-dismiss="modal" ng-click="addTrip()">
+                    <span ng-show="editor">Save Trip</span>
+                    <span ng-show="!editor">Add Trip</span>
+                </button>
             </div>
         </div>
     </div>

@@ -18,20 +18,26 @@ tripPlanner.controller("TripController", function ($scope) {
     $scope.trip = {};
     $scope.editing = -1;
     $scope.tripFile = null;
+    $scope.deleting = -1;
 
     $scope.$watch('tripFile', function () {
-        if ($scope.tripFile && $scope.tripFile.length) {
-            var trips = $scope.tripFile[0];
-            var fr = new FileReader();
+        $scope.upload($scope.tripFile);
+    });
 
-            fr.onload = function(e) {
-                $scope.planner = JSON.parse(e.target.result);
+    $scope.upload = function (files) {
+        if (files && files.length) {
+            var uploadedTrips = files[0];
+            var reader = new FileReader();
+
+            reader.onload = function () {
+                $scope.planner = JSON.parse(reader.result);
+                $scope.saveTrips();
+                $scope.$apply();
             };
 
-            fr.readAsText(trips);
-            this.saveTrips();
+            reader.readAsText(uploadedTrips);
         }
-    });
+    };
 
     $scope.addTrip = function () {
         removeFluff(this.trip.excludes);
@@ -49,14 +55,16 @@ tripPlanner.controller("TripController", function ($scope) {
 
         this.clearTrips();
         this.saveTrips();
+    };
 
-        $('#tripEditor').modal('toggle');
+    $scope.deletePendingTrip = function () {
+        $scope.planner.trips.splice($scope.deleting, 1);
+
+        this.saveTrips();
     };
 
     $scope.deleteTrip = function (index) {
-        $scope.planner.trips.splice(index, 1);
-
-        this.saveTrips();
+        $scope.deleting = index;
     };
 
     $scope.editTrip = function (index) {
