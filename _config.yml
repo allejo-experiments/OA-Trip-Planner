@@ -1,0 +1,21 @@
+# Site settings
+# ---
+
+title: Outdoor Adventures Trip Planner
+include:
+  - 'assets'
+
+
+# URL Settings
+# ---
+
+# the base hostname & protocol for your site
+url: "https://projects.allejo.io/OA-Trip-Planner/"
+
+# the subpath of your site, e.g. /blog/
+baseurl: ""
+
+
+# Build settings
+# ---
+markdown: redcarpet

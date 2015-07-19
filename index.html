@@ -1,0 +1,53 @@
+---
+layout: default
+---
+
+<section class="trip-planner" ng-controller="TripController">
+    <section class="trip-description">
+        <p>A tool written for Outdoor Adventures for creating a list of this semester's trips to be submitted to AS Marketing for publication on the AS website.</p>
+    </section>
+
+    <section class="trip-toolbar row">
+        <div class="col-md-6">
+            <button class="btn btn-primary" data-toggle="modal" data-target="#tripEditor">
+                <i class="fa fa-plus"></i>
+               <span>Add Trip</span>
+            </button>
+        </div>
+
+        <div class="col-md-6 text-right">
+            <button class="btn btn-primary" ngf-select ng-model="tripFile" ng-click="uploadTrips()">
+                <i class="fa fa-folder-open-o"></i>
+                <span>Open</span>
+            </button>
+
+            <button class="btn btn-primary" ng-click="downloadTrips()">
+                <i class="fa fa-download"></i>
+                <span>Download</span>
+            </button>
+        </div>
+    </section>
+
+    <section class="trip-list">
+        <article class="row" ng-repeat="trip in planner.trips track by $index">
+            <div class="col-md-2 text-center">
+                [[trip.date]]
+            </div>
+            <div class="col-md-7">
+                [[trip.name]]
+            </div>
+            <div class="col-md-3 text-right">
+                <button class="btn btn-primary btn-sm" ng-click="editTrip($index)" data-toggle="modal" data-target="#tripEditor">
+                    <i class="fa fa-pencil"></i>
+                    <span>Edit</span>
+                </button>
+                <a class="btn btn-danger btn-sm" ng-click="deleteTrip($index)" href="#">
+                    <i class="fa fa-trash"></i>
+                    <span>Delete</span>
+                </a>
+            </div>
+        </article>
+    </section>
+
+    {% include tripEditor.html %}
+</section>

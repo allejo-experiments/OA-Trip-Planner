@@ -1,29 +1,11 @@
-function removeFluff (array) {
-    if (!Array.isArray(array)) {
-        return;
-    }
-
-    for (var i = 0; i < array.length ; i++) {
-        array[i] = array[i].replace("•", "").trim();
-    }
-}
-
-function handleCurrency (string) {
-    if (string.toLowerCase() === "free") {
-        return "Free";
-    }
-    else if (string.charAt(0) !== "$") {
-        return "$" + string;
-    }
-
-    return string;
-}
-
 var model = {
     trips: []
 };
 
-var tripPlanner = angular.module("tripPlanner", []);
+var tripPlanner = angular.module("tripPlanner", ['ngImgCrop', 'ngFileUpload'], function ($interpolateProvider) {
+    $interpolateProvider.startSymbol('[[');
+    $interpolateProvider.endSymbol(']]');
+});
 
 tripPlanner.run(function () {
     if (localStorage.getItem("tripPlan") !== null) {
@@ -35,6 +17,21 @@ tripPlanner.controller("TripController", function ($scope) {
     $scope.planner = model;
     $scope.trip = {};
     $scope.editing = -1;
+    $scope.tripFile = null;
+
+    $scope.$watch('tripFile', function () {
+        if ($scope.tripFile && $scope.tripFile.length) {
+            var trips = $scope.tripFile[0];
+            var fr = new FileReader();
+
+            fr.onload = function(e) {
+                $scope.planner = JSON.parse(e.target.result);
+            };
+
+            fr.readAsText(trips);
+            this.saveTrips();
+        }
+    });
 
     $scope.addTrip = function () {
         removeFluff(this.trip.excludes);
@@ -50,29 +47,36 @@ tripPlanner.controller("TripController", function ($scope) {
             $scope.planner.trips.push($scope.trip);
         }
 
-        $scope.trip = {};
-        $scope.editing = -1;
-
+        this.clearTrips();
         this.saveTrips();
-    }
+
+        $('#tripEditor').modal('toggle');
+    };
 
     $scope.deleteTrip = function (index) {
         $scope.planner.trips.splice(index, 1);
 
         this.saveTrips();
-    }
+    };
 
     $scope.editTrip = function (index) {
         $scope.editing = index;
+        $scope.editor = true;
 
         $scope.trip = this.planner.trips[index];
-    }
+    };
 
-    $scope.exportTrips = function () {
-        console.log(JSON.stringify($scope.planner));
-    }
+    $scope.downloadTrips = function () {
+        download("trips.json", JSON.stringify(this.planner));
+    };
 
     $scope.saveTrips = function () {
         localStorage.setItem("tripPlan", JSON.stringify(this.planner));
-    }
+    };
+
+    $scope.clearTrips = function () {
+        $scope.editing = -1;
+        $scope.editor = false;
+        $scope.trip = {};
+    };
 });

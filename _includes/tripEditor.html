@@ -1,0 +1,72 @@
+<div class="modal fade" id="tripEditor" tabindex="-1" role="dialog" aria-labelledby="tripEditorLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="tripEditorLabel">
+                    <span ng-if="editor">Edit Trip</span>
+                    <span ng-if="!editor">Add New Trip</span>
+                </h4>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="tripDate">Date</label>
+                    <input type="text" class="form-control" id="tripDate" ng-model="trip.date" placeholder="Date of Trip" required />
+                </div>
+
+                <div class="form-group">
+                    <label for="tripName">Name</label>
+                    <input type="text" class="form-control" id="tripName" ng-model="trip.name"
+                           placeholder="Title of the trip"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="tripDescription">Description</label>
+                <textarea class="form-control" id="tripDescription" ng-model="trip.desc"
+                          placeholder="Describe what this trip will entail"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tripLocation">Location</label>
+                    <input type="text" class="form-control" id="tripLocation" ng-model="trip.location"
+                           placeholder="Meeting location"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="tripIncludes">Trip Includes</label>
+                    <textarea class="form-control" id="tripIncludes" ng-model="trip.includes" ng-list="&#10;"
+                          ng-trim="false" placeholder="Write one include per line"></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="tripIncludes">Trip Excludes</label>
+                    <textarea class="form-control" id="tripExcludes" ng-model="trip.excludes" ng-list="&#10;"
+                          ng-trim="false" placeholder="Write one exclude per line"></textarea>
+                </div>
+
+                <div class="row">
+                    <div class="form-group col-md-4">
+                        <label for="studentPrice">Student Price</label>
+                        <input type="text" class="form-control" id="studentPrice" ng-model="trip.studentPrice"
+                               placeholder="Price">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="nonStudentPrice">Non-Student Price</label>
+                        <input type="text" class="form-control" id="nonStudentPrice" ng-model="trip.nonStudentPrice"
+                               placeholder="Price">
+                    </div>
+
+                    <div class="form-group col-md-4">
+                        <label for="tripLevel">Level</label>
+                        <input type="number" class="form-control" id="tripLevel" ng-model="trip.level" placeholder="Level"/>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-primary" ng-click="addTrip()" ng-show="editor">Save Trip</button>
+                <button class="btn btn-primary" ng-click="addTrip()" ng-show="!editor">Add Trip</button>
+            </div>
+        </div>
+    </div>
+</div>

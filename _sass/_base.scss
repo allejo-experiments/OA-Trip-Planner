@@ -1,0 +1,33 @@
+.trip-list,
+.trip-toolbar,
+.trip-description {
+    margin-bottom: 20px;
+}
+
+.trip-description {
+}
+
+.trip-toolbar {
+}
+
+.trip-uploader {
+    display: none;
+}
+
+.trip-list {
+    article {
+        border-bottom: 1px solid #E0E0E0;
+
+        &:first-child {
+            border-top: 1px solid #E0E0E0;
+        }
+
+        &:nth-child(odd) {
+            background-color: #F0F8FF;
+        }
+
+        div {
+            line-height: 50px;
+        }
+    }
+}
