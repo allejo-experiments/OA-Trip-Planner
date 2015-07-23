@@ -33,6 +33,12 @@
     }
 }
 
+.trip-template {
+    display: none;
+    position: absolute;
+    left: -9999px;
+}
+
 .empty-trips {
     color: #949494;
     font-size: 18px;

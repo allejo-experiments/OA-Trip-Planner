@@ -37,10 +37,54 @@ layout: default
             <div class="col-md-2 text-center">
                 [[trip.date]]
             </div>
-            <div class="col-md-7">
+            <div class="col-md-6">
                 [[trip.name]]
             </div>
-            <div class="col-md-3 text-right">
+            <div class="col-md-4 text-right">
+                <div id="trip-title-[[$index]]" class="trip-template">
+                    [[trip.date]] &mdash; [[trip.name]]
+                </div>
+                <div id="trip-body-[[$index]]" class="trip-template">
+                    <h4>[[trip.name]]</h4>
+                    <p>[[trip.desc]]</p>
+                    <p>
+                        <strong>Trip includes:</strong>
+                    </p>
+                    <ul>
+                        <li ng-repeat="include in trip.includes">
+                            [[include]]
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Trip excludes:</strong>
+                    </p>
+                    <ul>
+                        <li ng-repeat="exclude in trip.excludes">
+                            [[exclude]]
+                        </li>
+                    </ul>
+                    <p>
+                        <strong>Meeting location:</strong> [[trip.location]]
+                    </p>
+                    <p>
+                        <strong>Strenuosity Level:</strong> [[trip.level]]
+                    </p>
+                    <p>
+                        <strong>Cost</strong>
+                    </p>
+                    <ul>
+                        <li>Student:</li> [[trip.studentPrice]]
+                        <li>Non-student:</li> [[trip.nonStudentPrice]]
+                    </ul>
+                </div>
+                <button class="btn btn-info btn-sm" ng-click="copyTripTitle($index)">
+                    <i class="fa fa-files-o"></i>
+                    <span>Copy Title</span>
+                </button>
+                <button class="btn btn-info btn-sm" ng-click="copyTripBody($index)">
+                    <i class="fa fa-files-o"></i>
+                    <span>Copy Body</span>
+                </button>
                 <button class="btn btn-primary btn-sm" ng-click="editTrip($index)" data-toggle="modal" data-target="#tripEditor">
                     <i class="fa fa-pencil"></i>
                     <span>Edit</span>
