@@ -132,13 +132,13 @@ tripPlanner.controller("TripController", function ($scope) {
     };
 
     $scope.copyTripTitle = function (index) {
-        var value = $("#trip-title-" + index).html();
+        var value = $("#trip-title-" + index).html().trim();
 
         copyTextToClipboard(value);
     };
 
     $scope.copyTripBody = function (index) {
-        var value = $("#trip-body-" + index).html();
+        var value = $("#trip-body-" + index).html().trim();
 
         copyTextToClipboard(value);
     };
